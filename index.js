@@ -16,12 +16,10 @@ app.get('/api/hello', (_, res) => res.json({ greeting: 'hello API' }));
 /*
   const clientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
   mongoose.connect(`${process.env.MONGO_PROTOCOL}${process.env.MONGO_USER}${process.env.MONGO_PW}${process.env.MONGO_URI}`, clientOptions);
-
   const urlSchema = new mongoose.Schema({
     original: { type: String, required: true },
     short: Number
   });
-
   const URL = mongoose.model('url', urlSchema);
 */
 
@@ -31,8 +29,7 @@ app.get('/api/hello', (_, res) => res.json({ greeting: 'hello API' }));
     const inputURL = req.body.url;
     let shortInput = 1;
     
-    // matching by protocol
-    // if not http/s or ws/s return error
+    // matching by protocol, if not http/s or ws/s return error
     const urlRegex = new RegExp(/^(https?|wss?):\/\/[^\s/$.?#].[^\s]*$/);
     if (!inputURL.match(urlRegex)) {
       res.json({ error: 'Invalid URL' });
